@@ -6,7 +6,7 @@ repeat:
 looop:
     jmp waitForKeypress
 
-backToLoop:
+backToLoop: ;if al contains ` prints out the buffer otherwise pushes into the stack
     cmp al, 0h60
     je writeBuffer
     push ax
@@ -18,6 +18,8 @@ waitForKeypress:
     jmp backToLoop
 
 writeBuffer:
+    push 0
+    mov bx, sp
     jmp writeLoop
 
 writeLoop:
@@ -39,5 +41,5 @@ end:
 
 jmp $
 
-times 510-($-$$) db 0
-db 0x55, 0xaa
+times 510-($-$$) db 0   ;magic
+dw 0xAA55
