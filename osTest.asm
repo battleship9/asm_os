@@ -18,8 +18,6 @@ waitForKeypress:
     jmp backToLoop
 
 writeBuffer:
-    push 0
-    mov bx, sp
     jmp writeLoop
 
 writeLoop:
