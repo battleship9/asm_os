@@ -18,13 +18,17 @@ waitForKeypress:
     jmp backToLoop
 
 writeBuffer:
+    mov ah, 0x0e
+    mov bx, bp
     jmp writeLoop
 
 writeLoop:
-    pop ax
-    mov ah, 0x0e
+    mov al, [bx]
     int 0x10
-    cmp sp, bp
+    ;pop ax
+    ;mov ah, 0x0e
+    ;int 0x10
+    cmp bx, bp
     je beforeRepeat
     jmp writeLoop
 
