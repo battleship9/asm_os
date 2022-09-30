@@ -1,7 +1,7 @@
 mov bp, 0x8000
-mov sp, bp
 
 repeat:
+    mov sp, bp
 
 looop:
     jmp waitForKeypress
@@ -23,12 +23,10 @@ writeBuffer:
     jmp writeLoop
 
 writeLoop:
-    mov al, [bx]
+    mov al, [bx - 2]
     int 0x10
-    ;pop ax
-    ;mov ah, 0x0e
-    ;int 0x10
-    cmp bx, bp
+    sub bx, 2
+    cmp bx, sp
     je beforeRepeat
     jmp writeLoop
 
